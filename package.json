@@ -1,0 +1,51 @@
+{
+  "name": "@aetherneum/council",
+  "version": "0.1.0",
+  "description": "Convene a panel of AI models on any decision and get a structured verdict — approve, revise, or veto, plus exactly where the models disagree.",
+  "type": "module",
+  "bin": {
+    "council": "bin/council.mjs"
+  },
+  "exports": {
+    ".": "./src/council.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "council": "node bin/council.mjs",
+    "demo": "node bin/council.mjs --demo"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "code-review",
+    "multi-model",
+    "ensemble",
+    "decision",
+    "claude",
+    "groq",
+    "openai",
+    "cli",
+    "github-action",
+    "aetherneum",
+    "council"
+  ],
+  "homepage": "https://aetherneum.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aetherneum-network/council.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aetherneum-network/council/issues"
+  },
+  "author": "Aetherneum",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18"
+  }
+}

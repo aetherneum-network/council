@@ -1,0 +1,33 @@
+name: "The Council"
+description: "Convene a panel of AI models on your pull request and post a single, structured verdict."
+branding:
+  icon: "users"
+  color: "blue"
+inputs:
+  question:
+    description: "What to ask the Council about this PR."
+    required: false
+    default: "Review this pull request. Is it safe to merge? Flag correctness, security, and design risks."
+  fail-on:
+    description: "Fail the job if the panel verdict is this or worse: veto | revise. Empty = never fail."
+    required: false
+    default: ""
+  comment:
+    description: "Post the verdict as a sticky PR comment (true/false)."
+    required: false
+    default: "true"
+  github-token:
+    description: "Token used to post the PR comment."
+    required: false
+    default: ${{ github.token }}
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        node "${{ github.action_path }}/src/action.mjs"
+      env:
+        COUNCIL_QUESTION: ${{ inputs.question }}
+        COUNCIL_FAIL_ON: ${{ inputs.fail-on }}
+        COUNCIL_COMMENT: ${{ inputs.comment }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}

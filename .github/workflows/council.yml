@@ -1,0 +1,27 @@
+# Example: convene the Council on every pull request.
+# Copy this into your own repo and add your provider keys as Actions secrets.
+name: Council review
+on:
+  pull_request:
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  council:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: aetherneum-network/council@v0
+        with:
+          question: "Review this PR. Is it safe to merge? Flag correctness, security, and design risks."
+          fail-on: ""        # set to "veto" to block merge on a quorum veto
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GROQ_API_KEY:      ${{ secrets.GROQ_API_KEY }}
+          # CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          # OPENAI_API_KEY:   ${{ secrets.OPENAI_API_KEY }}

@@ -1,0 +1,157 @@
+{
+  "question": "Should a solo founder store user session JWTs in localStorage for a single-page web app?",
+  "panel": "veto",
+  "vetoed": true,
+  "split": true,
+  "unanimous": false,
+  "agreement": 0.5,
+  "tally": {
+    "approve": 0,
+    "revise": 2,
+    "veto": 2,
+    "abstain": 0
+  },
+  "seats": {
+    "attempted": 4,
+    "answered": 4,
+    "failed": 0
+  },
+  "opinions": [
+    {
+      "verdict": "revise",
+      "confidence": 0.8,
+      "headline": "localStorage for JWTs creates XSS vulnerability; use httpOnly cookies instead",
+      "rationale": "Storing JWTs in localStorage exposes them to XSS attacks since any JavaScript can access localStorage. This is a well-documented security anti-pattern. HttpOnly cookies with SameSite attributes provide better protection against both XSS and CSRF attacks. For a solo founder, the implementation complexity difference is minimal but security impact is significant.",
+      "risks": [
+        "XSS attacks can steal tokens",
+        "No automatic expiration on browser close",
+        "Accessible to all scripts on domain",
+        "Violates security best practices"
+      ],
+      "seat": "Anthropic Claude",
+      "id": "anthropic",
+      "model": "claude-sonnet-4-20250514",
+      "ms": 4535
+    },
+    {
+      "verdict": "veto",
+      "confidence": 0.9,
+      "headline": "Do not store JWTs in localStorage",
+      "rationale": "Storing user session JWTs in localStorage is insecure because it exposes sensitive data to XSS attacks. A better approach would be to use secure cookies with the HttpOnly and Secure flags set. This protects the tokens from being accessed by malicious scripts. Alternatively, consider using a token storage solution that provides additional security features.",
+      "risks": [
+        "XSS attacks",
+        "token theft",
+        "session hijacking"
+      ],
+      "seat": "Groq Llama",
+      "id": "groq",
+      "model": "llama-3.3-70b-versatile",
+      "ms": 614
+    },
+    {
+      "verdict": "revise",
+      "confidence": 0.95,
+      "headline": "Avoid localStorage for JWTs due to XSS risks; use httpOnly cookies instead.",
+      "rationale": "Storing JWTs in localStorage exposes them to cross-site scripting (XSS) attacks, where malicious scripts can read and exfiltrate tokens. Using httpOnly, secure cookies mitigates this risk by preventing JavaScript access. While CSRF becomes a concern, it is more manageable via anti-CSRF tokens or SameSite attributes. This approach aligns with current security best practices for SPAs.",
+      "risks": [
+        "XSS attacks can steal JWTs from localStorage",
+        "Lack of httpOnly protection increases token exposure",
+        "Potential session hijacking if tokens are leaked",
+        "Long-lived tokens amplify breach impact"
+      ],
+      "seat": "Cerebras Qwen",
+      "id": "cerebras",
+      "model": "qwen-3-235b-a22b-instruct-2507",
+      "ms": 600
+    },
+    {
+      "verdict": "veto",
+      "confidence": 0.95,
+      "headline": "Storing JWTs in localStorage is a security risk for web apps.",
+      "rationale": "Storing JWTs in localStorage is not recommended due to the risk of XSS attacks, where an attacker can steal the token from the client-side storage. This can lead to unauthorized access to user accounts and data breaches. It's better to use HttpOnly cookies or other secure methods to store tokens.",
+      "risks": [
+        "XSS attacks",
+        "Unauthorized access",
+        "Data breaches"
+      ],
+      "seat": "Moonshot Kimi",
+      "id": "moonshot",
+      "model": "moonshot-v1-32k",
+      "ms": 4523
+    }
+  ],
+  "dissent": [
+    {
+      "seat": "Anthropic Claude",
+      "verdict": "revise",
+      "headline": "localStorage for JWTs creates XSS vulnerability; use httpOnly cookies instead",
+      "confidence": 0.8
+    },
+    {
+      "seat": "Cerebras Qwen",
+      "verdict": "revise",
+      "headline": "Avoid localStorage for JWTs due to XSS risks; use httpOnly cookies instead.",
+      "confidence": 0.95
+    }
+  ],
+  "risks": [
+    {
+      "seat": "Anthropic Claude",
+      "risk": "XSS attacks can steal tokens"
+    },
+    {
+      "seat": "Anthropic Claude",
+      "risk": "No automatic expiration on browser close"
+    },
+    {
+      "seat": "Anthropic Claude",
+      "risk": "Accessible to all scripts on domain"
+    },
+    {
+      "seat": "Anthropic Claude",
+      "risk": "Violates security best practices"
+    },
+    {
+      "seat": "Groq Llama",
+      "risk": "XSS attacks"
+    },
+    {
+      "seat": "Groq Llama",
+      "risk": "token theft"
+    },
+    {
+      "seat": "Groq Llama",
+      "risk": "session hijacking"
+    },
+    {
+      "seat": "Cerebras Qwen",
+      "risk": "XSS attacks can steal JWTs from localStorage"
+    },
+    {
+      "seat": "Cerebras Qwen",
+      "risk": "Lack of httpOnly protection increases token exposure"
+    },
+    {
+      "seat": "Cerebras Qwen",
+      "risk": "Potential session hijacking if tokens are leaked"
+    },
+    {
+      "seat": "Cerebras Qwen",
+      "risk": "Long-lived tokens amplify breach impact"
+    },
+    {
+      "seat": "Moonshot Kimi",
+      "risk": "XSS attacks"
+    },
+    {
+      "seat": "Moonshot Kimi",
+      "risk": "Unauthorized access"
+    },
+    {
+      "seat": "Moonshot Kimi",
+      "risk": "Data breaches"
+    }
+  ],
+  "errors": [],
+  "generatedAt": "2026-05-26T00:48:51.598Z"
+}
