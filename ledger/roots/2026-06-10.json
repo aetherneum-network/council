@@ -1,0 +1,20 @@
+{
+  "root": {
+    "schema": "aetherneum.council-ledger-root.v1",
+    "day": "2026-06-10",
+    "tree": "RFC6962-SHA256",
+    "root_hash": "718d3c4854de83092d51f9d208e2d34728397056405b91f88c3e15364f1fa046",
+    "tree_size": 1,
+    "computed_at": "2026-06-10T04:27:19+00:00",
+    "issuer_url": "https://aetherneum.com",
+    "provisional": true
+  },
+  "root_canonical": "{\"computed_at\":\"2026-06-10T04:27:19+00:00\",\"day\":\"2026-06-10\",\"issuer_url\":\"https://aetherneum.com\",\"provisional\":true,\"root_hash\":\"718d3c4854de83092d51f9d208e2d34728397056405b91f88c3e15364f1fa046\",\"schema\":\"aetherneum.council-ledger-root.v1\",\"tree\":\"RFC6962-SHA256\",\"tree_size\":1}",
+  "signature": {
+    "alg": "Ed25519",
+    "public_key": "d267b4307118c259b6bec3cd98b233033a901d7b52fd3bb05d89134a534d4023",
+    "sig": "84e7940be871884974ae41dad846a362882cb8457c199a52d31edb82782589f4fb65de9cdf42fac0741a9dc9b6dab9fa13bb0f3ae9e4f258036886104826d104",
+    "canonicalization": "UTF-8 of json.dumps(payload, sort_keys=True, separators=(',',':'), ensure_ascii=False)"
+  },
+  "published_url": null
+}
