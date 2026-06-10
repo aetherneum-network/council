@@ -30,12 +30,12 @@ export const REGISTRY = [
   },
   {
     id: "cerebras",
-    seat: "Cerebras Qwen",
+    seat: "Cerebras GLM",
     type: "openai",
     base: "https://api.cerebras.ai/v1",
     envKey: "CEREBRAS_API_KEY",
     envModel: "COUNCIL_CEREBRAS_MODEL",
-    model: "qwen-3-235b-a22b",
+    model: "zai-glm-4.7",
   },
   {
     id: "moonshot",
@@ -44,7 +44,7 @@ export const REGISTRY = [
     base: "https://api.moonshot.ai/v1",
     envKey: "MOONSHOT_API_KEY",
     envModel: "COUNCIL_MOONSHOT_MODEL",
-    model: "kimi-k2-0711-preview",
+    model: "kimi-k2.5",
   },
   {
     id: "openai",
