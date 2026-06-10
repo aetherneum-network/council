@@ -131,8 +131,8 @@ A seat activates **only** when its key is in your environment. No key, no seat.
 |---|---|---|
 | Anthropic Claude | `ANTHROPIC_API_KEY` | `claude-sonnet-4-20250514` |
 | Groq (Llama) | `GROQ_API_KEY` | `llama-3.3-70b-versatile` |
-| Cerebras (GLM) | `CEREBRAS_API_KEY` | `zai-glm-4.7` |
-| Moonshot (Kimi) | `MOONSHOT_API_KEY` | `kimi-k2.5` |
+| Cerebras (GPT-OSS) | `CEREBRAS_API_KEY` | `gpt-oss-120b` |
+| Moonshot (Kimi) | `MOONSHOT_API_KEY` | `moonshot-v1-32k` |
 | OpenAI | `OPENAI_API_KEY` | `gpt-4o` |
 | DeepSeek | `DEEPSEEK_API_KEY` | `deepseek-chat` |
 | Mistral | `MISTRAL_API_KEY` | `mistral-large-latest` |
