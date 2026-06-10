@@ -1,6 +1,6 @@
 {
   "name": "@aetherneum/council",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Convene a panel of AI models on any decision and get a structured verdict — approve, revise, or veto, plus exactly where the models disagree.",
   "type": "module",
   "bin": {

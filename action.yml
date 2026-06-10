@@ -20,6 +20,10 @@ inputs:
     description: "Token used to post the PR comment."
     required: false
     default: ${{ github.token }}
+  certify-url:
+    description: "Certificate issuer endpoint. When set, the session is certified and the signed receipt URL is embedded in the PR comment."
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
@@ -30,4 +34,5 @@ runs:
         COUNCIL_QUESTION: ${{ inputs.question }}
         COUNCIL_FAIL_ON: ${{ inputs.fail-on }}
         COUNCIL_COMMENT: ${{ inputs.comment }}
+        COUNCIL_CERTIFY_URL: ${{ inputs.certify-url }}
         GITHUB_TOKEN: ${{ inputs.github-token }}

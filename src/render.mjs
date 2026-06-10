@@ -79,6 +79,7 @@ export function renderTerminal(r) {
     for (const e of r.errors) out.push("  " + dim(`(${e.seat} did not answer: ${truncate(e.error, 50)})`));
   }
   out.push("");
+  if (r.certUrl) out.push("  " + teal("◇ certified") + dim(" · ") + r.certUrl);
   out.push("  " + dim(`${r.seats.answered}/${r.seats.attempted} seats answered · per Æthera ad astra`));
   out.push("");
   return out.join("\n");
@@ -114,6 +115,10 @@ export function renderMarkdown(r) {
     lines.push("\n</details>");
   }
   lines.push("");
+  if (r.certUrl) {
+    lines.push(`◇ **Certified by The Council** — [view the signed receipt](${r.certUrl})`);
+    lines.push("");
+  }
   lines.push(
     `<sub>Reviewed by [The Council](https://github.com/aetherneum-network/council) · multi-model verdict, not a single opinion.</sub>`
   );

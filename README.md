@@ -152,9 +152,28 @@ git diff | council "<q>"        pipe an artifact in
 council --json                  full machine-readable verdict
 council --md                    Markdown report (PR comments)
 council --fail-on veto          exit non-zero on a quorum veto (CI gate)
+council --certify [url]         mint a signed certificate of the session
 council --seats                 list the seats you have keys for
 council --demo                  recorded example, no key needed
 ```
+
+## ◇ Certificates
+
+Any session can end in a receipt. `--certify` POSTs the full session result to a
+certificate issuer, which validates its internal consistency, signs it (Ed25519),
+anchors it in a daily RFC 6962 Merkle ledger, and returns a permanent URL:
+
+```bash
+council --certify "Should we ship this?"        # issuer from COUNCIL_CERTIFY_URL
+# ◇ certified: https://aetherneum.com/cert/ae1-…
+```
+
+The certificate format is open and verifiable offline — signature, ledger
+inclusion proof and the exact verification steps are documented at
+[aetherneum.com/cert/verify](https://aetherneum.com/cert/verify).
+[Aetherneum](https://aetherneum.com/cert/) runs the first issuer; issuance there
+is operator-gated while the program rolls out. In CI, set the Action's
+`certify-url` input and the signed receipt link is embedded in the PR comment.
 
 ## 🌍 Translations
 

@@ -73,6 +73,18 @@ async function main() {
     process.exit(1);
   }
 
+  // optional: mint a signed receipt and embed it in the comment (additive —
+  // certification failure never changes the verdict or the job outcome)
+  if (process.env.COUNCIL_CERTIFY_URL) {
+    try {
+      const { requestCertificate } = await import("./certify.mjs");
+      r.certUrl = await requestCertificate(r, process.env.COUNCIL_CERTIFY_URL, { type: "diff" });
+      console.log("Council: certified —", r.certUrl);
+    } catch (e) {
+      console.error("Council: certification failed (verdict unaffected):", e.message);
+    }
+  }
+
   const md = renderMarkdown(r);
   console.log(md);
 

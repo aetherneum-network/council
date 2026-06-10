@@ -41,6 +41,8 @@ OPTIONS
       --md, --markdown  Print a Markdown report (for PR comments)
       --fail-on <v>     Exit non-zero if panel verdict is this or worse
                         (veto | revise) — handy in CI
+      --certify [url]   POST the session to a certificate issuer and print the
+                        signed receipt URL (or set COUNCIL_CERTIFY_URL)
   -h, --help            Show this help
   -v, --version         Show version
 
@@ -116,6 +118,7 @@ async function main() {
   const asJson = flag("--json").present;
   const asMd = flag("--md", "--markdown").present;
   const failOn = flag("--fail-on").value;
+  const certify = flag("--certify");
 
   // gather context
   let context = "";
@@ -139,6 +142,8 @@ async function main() {
       if (["-f", "--file", "--fail-on", "--diff", "--seats"].includes(a) && argv[i + 1] && !argv[i + 1].startsWith("-")) {
         if (a !== "--diff") i++; // --diff's value is optional but we already captured it
       }
+      // --certify's value is optional and only ever a URL — never eat the question
+      if (a === "--certify" && argv[i + 1] && /^https?:\/\//.test(argv[i + 1])) i++;
       continue;
     }
     positionals.push(a);
@@ -162,6 +167,27 @@ async function main() {
     }
     console.error("council error:", e.message);
     process.exit(1);
+  }
+
+  // certification is additive: failure never changes the verdict or exit code
+  if (certify.present) {
+    const certifyUrl =
+      (typeof certify.value === "string" && /^https?:\/\//.test(certify.value)
+        ? certify.value
+        : process.env.COUNCIL_CERTIFY_URL) || "";
+    if (!certifyUrl) {
+      console.error("  ◇ --certify: no issuer endpoint — pass a URL or set COUNCIL_CERTIFY_URL. Skipping.");
+    } else {
+      try {
+        const { requestCertificate } = await import("../src/certify.mjs");
+        const itemType = d.present ? "diff" : f.present ? "file" : "question";
+        const certUrl = await requestCertificate(r, certifyUrl, { type: itemType });
+        r.certUrl = certUrl; // rides inside --json output and both reports
+        if (!asJson) process.stderr.write(`  ◇ certified: ${certUrl}\n`);
+      } catch (e) {
+        console.error("  ◇ --certify failed (verdict unaffected):", e.message);
+      }
+    }
   }
 
   if (asJson) console.log(JSON.stringify(r, null, 2));
